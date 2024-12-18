@@ -1,16 +1,25 @@
-# This is a sample Python script.
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtCore import Qt
+from dashboard import Dashboard
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("3D Plot Dashboard")
+        self.setGeometry(100, 100, 1200, 800)
 
+        self.central_widget = QWidget()
+        self.setCentralWidget(self.central_widget)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+        layout = QVBoxLayout()
+        self.dashboard = Dashboard()
+        layout.addWidget(self.dashboard)
 
+        self.central_widget.setLayout(layout)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
